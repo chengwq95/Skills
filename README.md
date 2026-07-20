@@ -1,29 +1,39 @@
-# E-commerce Price Compare
+# Wei Quan's Agent Skills
 
-An evidence-backed e-commerce price-comparison skill for AI agents. It helps turn a shopping list into a trustworthy comparison across marketplaces such as Shopee, Lazada, Taobao, and Amazon.
+A growing personal collection of reusable skills for AI agents.
 
-## Package
+Skills are self-contained folders of instructions, scripts, and resources that teach an agent how to complete a specialised task reliably. This repository uses a capability-based style: a skill may work with Claude, Codex, or another capable agent without requiring a particular vendor or browser extension.
 
-- `ecommerce-price-compare.skill` — installable skill package with the workflow and Excel workbook builder.
+## Skills
 
-## What it does
+| Skill | Description | Source | Package |
+| --- | --- | --- | --- |
+| E-commerce Price Compare | Evidence-backed comparison of exact product variants across marketplaces, with delivery, currency, seller, and availability checks. | [Source](./skills/ecommerce-price-compare/) | [Download](./ecommerce-price-compare.skill) |
 
-- Verifies the exact selected variant on the product page rather than trusting search-result price cards.
-- Records seller, availability, price type, delivery assumptions, taxes, discounts, currency, and source URL.
-- Compares like-for-like offers only and marks incomplete prices as provisional.
-- Flags likely counterfeit, misleading, pre-order, or unavailable listings.
-- Produces a three-sheet Excel comparison when spreadsheet support is available.
+## Repository layout
 
-## Example requests
+```text
+.
+├── skills/                 # Source of truth: one self-contained folder per skill
+├── template/               # Starting point for a new skill
+├── ecommerce-price-compare.skill
+└── README.md               # This catalogue
+```
 
-- “Compare the price of this 1TB SSD on Shopee and Lazada in Malaysia.”
-- “Find the cheapest trustworthy listing for these items and include shipping.”
-- “Turn these product links into a price-comparison spreadsheet.”
+## Add a new skill
 
-## Key safeguards
+1. Copy `template/` into `skills/<skill-name>/`.
+2. Write a focused `SKILL.md` with only `name` and `description` in its YAML frontmatter.
+3. Add scripts, references, or assets only when they make repeated work more reliable.
+4. Validate the skill, package it as `<skill-name>.skill`, and add it to the table above.
 
-The skill does not enter credentials, bypass CAPTCHAs, place orders, redeem coupons, or contact sellers without explicit permission. If shipping, tax, coupon eligibility, or exchange-rate information cannot be verified, it is disclosed instead of being guessed.
+## Compatibility and quality
 
-## Installing
+- Keep each skill portable: describe required capabilities instead of naming a specific agent whenever possible.
+- Record assumptions and evidence for tasks that depend on changing information.
+- Do not fabricate browser, account, price, or file results when a required capability is unavailable.
+- Test a skill before publishing it and state any meaningful limitations in its instructions.
 
-Download `ecommerce-price-compare.skill` and import it into an agent platform that supports Skill packages. The workflow is capability-based, so it can work with an authenticated browser, public browsing tools, or user-supplied links and screenshots.
+## Disclaimer
+
+These skills are personal, evolving tools. Review and test them in your own environment before relying on them for critical, financial, legal, medical, or production decisions.
